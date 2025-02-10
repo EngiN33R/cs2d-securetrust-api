@@ -9,18 +9,18 @@ if (isset($_GET['p'])) {
             $found = true;
         }
     }
+}
 
-    $info = "This is a SecureTrust node.";
-    $contact = "";
-    $infos = array_map(function ($i) {
-        return explode("=", $i);
-    }, explode("\n", file_get_contents("../../data/info.cfg")));
-    foreach ($infos as $i) {
-        if ($i[0] == "contact") {
-            $contact = $i[1];
-        } elseif ($i[0] == "info") {
-            $info = $i[1];
-        }
+$info = "This is a SecureTrust node.";
+$contact = "";
+$infos = array_map(function ($i) {
+    return explode("=", $i);
+}, explode("\n", file_get_contents("../../data/info.cfg")));
+foreach ($infos as $i) {
+    if ($i[0] == "contact") {
+        $contact = json_decode($i[1]);
+    } elseif ($i[0] == "info") {
+        $info = json_decode($i[1]);
     }
 }
 
